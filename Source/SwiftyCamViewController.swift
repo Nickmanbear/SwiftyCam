@@ -1170,7 +1170,7 @@ import AVFoundation
 
 	@objc public class func deviceWithMediaType(_ mediaType: String, preferringPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
 		if #available(iOS 10.0, *) {
-				let avDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInWideAngleCamera, for: AVMediaType(rawValue: mediaType), position: position)
+				let avDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInTripleCamera, for: AVMediaType(rawValue: mediaType), position: position)
 				return avDevice
 		} else {
 				// Fallback on earlier versions
