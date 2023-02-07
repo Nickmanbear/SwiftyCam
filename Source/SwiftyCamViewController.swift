@@ -1373,11 +1373,7 @@ extension SwiftyCamViewController {
 			return
 		}
 		do {
-			if #available(iOS 13.0, *) {
-				let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInTripleCamera, for: AVMediaType(rawValue: mediaType), position: position)
-			} else {
-				let captureDevice = AVCaptureDevice.devices().first
-			}
+			let captureDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
 			try captureDevice?.lockForConfiguration()
 
 			zoomScale = min(maxZoomScale, max(1.0, min(beginZoomScale * pinch.scale,  captureDevice!.activeFormat.videoMaxZoomFactor)))
@@ -1452,11 +1448,7 @@ extension SwiftyCamViewController {
         let translationDifference = currentTranslation - previousPanTranslation
 
         do {
-			if #available(iOS 13.0, *) {
-				let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInTripleCamera, for: AVMediaType(rawValue: mediaType), position: position)
-			} else {
-				let captureDevice = AVCaptureDevice.devices().first
-			}
+			let captureDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
             try captureDevice?.lockForConfiguration()
 
             let currentZoom = captureDevice?.videoZoomFactor ?? 0.0
