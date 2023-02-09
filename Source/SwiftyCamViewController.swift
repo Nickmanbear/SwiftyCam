@@ -1093,7 +1093,7 @@ import AVFoundation
         
     }
     
-    var enableHighResolutionOutput: Bool = false
+    var enableHighResolutionOutput: Bool = true
     
     @available(iOS 10.0, *)
     private func capturePhoto(){
@@ -1178,9 +1178,8 @@ import AVFoundation
 				.builtInTelephotoCamera,
 			]
 			let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType(rawValue: mediaType), position: position)
-			let selectedDevice = discoverySession.devices.first
-			print(selectedDevice?.localizedName)
-			return selectedDevice
+
+			return  discoverySession.devices.first
 		} else {
 			// Fallback on earlier versions
 			let avDevice = AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType))
