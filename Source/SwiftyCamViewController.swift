@@ -1170,25 +1170,27 @@ import AVFoundation
 
 	@objc public class func deviceWithMediaType(_ mediaType: String, preferringPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
 		if #available(iOS 13.0, *) {
-				let avDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInTripleCamera, for: AVMediaType(rawValue: mediaType), position: position)
-				return avDevice
+			let deviceTypes: [AVCaptureDevice.DeviceType] = [
+				.builtInTripleCamera,
+				.builtInDualWideCamera,
+				.builtInDualCamera,
+				.builtInWideAngleCamera,
+				.builtInTelephotoCamera,
+			]
+			let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType(rawValue: mediaType), position: position)
+			let selectedDevice = discoverySession.devices.first
+			return selectedDevice
 		} else {
-				// Fallback on earlier versions
-				let avDevice = AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType))
-				var avDeviceNum = 0
-				for device in avDevice {
-						print("deviceWithMediaType Position: \(device.position.rawValue)")
-						if device.position == position {
-								break
-						} else {
-								avDeviceNum += 1
-						}
+			// Fallback on earlier versions
+			let avDevice = AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType))
+			for device in avDevice {
+				if device.position == position {
+					return device
 				}
+			}
 
-				return avDevice[avDeviceNum]
+			return avDevice[0]
 		}
-
-		//return AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType), position: position).first
 	}
 
 	/// Enable or disable flash for photo
@@ -1373,6 +1375,7 @@ extension SwiftyCamViewController {
 			return
 		}
 		do {
+
 			let captureDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
 			try captureDevice?.lockForConfiguration()
 
