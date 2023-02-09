@@ -1179,6 +1179,7 @@ import AVFoundation
 			]
 			let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType(rawValue: mediaType), position: position)
 			let selectedDevice = discoverySession.devices.first
+			print(selectedDevice.name)
 			return selectedDevice
 		} else {
 			// Fallback on earlier versions
