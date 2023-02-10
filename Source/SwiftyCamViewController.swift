@@ -291,7 +291,6 @@ import AVFoundation
         addGestureRecognizers()
 
 		previewLayer.session = session
-		previewLayer.connection.videoScaleAndCropFactor = 1.0
 
 		// Test authorization status for Camera and Micophone
 
@@ -326,6 +325,7 @@ import AVFoundation
     private func updatePreviewLayer(layer: AVCaptureConnection, orientation: AVCaptureVideoOrientation) {
 
         layer.videoOrientation = orientation
+		layer.videoScaleAndCropFactor = 1.0
 
         previewLayer.frame = self.view.bounds
 
