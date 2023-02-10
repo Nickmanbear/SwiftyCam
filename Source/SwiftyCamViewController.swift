@@ -282,7 +282,6 @@ import AVFoundation
 	override open func viewDidLoad() {
 		super.viewDidLoad()
         previewLayer = PreviewView(frame: view.frame, videoGravity: videoGravity)
-		previewLayer.videoPreviewLayer.connection.videoScaleAndCropFactor = 1.0
         // previewLayer.center = view.center
         view.addSubview(previewLayer)
         view.sendSubviewToBack(previewLayer)
@@ -317,6 +316,7 @@ import AVFoundation
 		}
 		sessionQueue.async { [unowned self] in
 			self.configureSession()
+			previewLayer.videoPreviewLayer.connection.videoScaleAndCropFactor = 1.0
 		}
 	}
 
