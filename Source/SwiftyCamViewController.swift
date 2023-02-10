@@ -101,7 +101,7 @@ import AVFoundation
 
 	/// Video capture quality
 
-	public var videoQuality : VideoQuality       = .photo
+	public var videoQuality : VideoQuality       = .resolution3840x2160
 
 	/// Disable audio
 	public var disableAudio											 = false
