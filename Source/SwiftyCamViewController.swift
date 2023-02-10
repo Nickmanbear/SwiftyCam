@@ -291,6 +291,7 @@ import AVFoundation
         addGestureRecognizers()
 
 		previewLayer.session = session
+		previewLayer.connection.videoScaleAndCropFactor = 1.0
 
 		// Test authorization status for Camera and Micophone
 
