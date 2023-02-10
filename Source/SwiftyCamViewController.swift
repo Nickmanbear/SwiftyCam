@@ -101,7 +101,7 @@ import AVFoundation
 
 	/// Video capture quality
 
-	public var videoQuality : VideoQuality       = .high
+	public var videoQuality : VideoQuality       = .photo
 
 	/// Disable audio
 	public var disableAudio											 = false
@@ -1171,9 +1171,9 @@ import AVFoundation
 	@objc public class func deviceWithMediaType(_ mediaType: String, preferringPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
 		if #available(iOS 13.0, *) {
 			let deviceTypes: [AVCaptureDevice.DeviceType] = [
-				// .builtInTripleCamera,
-				// .builtInDualWideCamera,
-				// .builtInDualCamera,
+				.builtInTripleCamera,
+				.builtInDualWideCamera,
+				.builtInDualCamera,
 				.builtInWideAngleCamera,
 				.builtInTelephotoCamera,
 			]
