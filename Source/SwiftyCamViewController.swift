@@ -316,7 +316,7 @@ import AVFoundation
 		}
 		sessionQueue.async { [unowned self] in
 			self.configureSession()
-			previewLayer.videoPreviewLayer?.connection.videoScaleAndCropFactor = 1.0
+			previewLayer.videoPreviewLayer.connection?.videoScaleAndCropFactor = 1.0
 		}
 	}
 
