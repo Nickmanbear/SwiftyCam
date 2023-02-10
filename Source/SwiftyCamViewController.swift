@@ -213,11 +213,11 @@ import AVFoundation
 
 	/// Variable for storing current zoom scale
 
-	public var zoomScale                    = CGFloat(2.0)
+	public var zoomScale                    = CGFloat(1.0)
 
 	/// Variable for storing initial zoom scale before Pinch to Zoom begins
 
-	public var beginZoomScale               = CGFloat(2.0)
+	public var beginZoomScale               = CGFloat(1.0)
 
 	/// Returns true if the torch (flash) is currently enabled
 
@@ -793,6 +793,7 @@ import AVFoundation
 		if self.session.canAddOutput(movieFileOutput) {
 			self.session.addOutput(movieFileOutput)
 			if let connection = movieFileOutput.connection(with: AVMediaType.video) {
+				connection.videoScaleAndCropFactor = 1.0
 				if connection.isVideoStabilizationSupported {
 					connection.preferredVideoStabilizationMode = .auto
 				}
