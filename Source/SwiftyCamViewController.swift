@@ -213,11 +213,11 @@ import AVFoundation
 
 	/// Variable for storing current zoom scale
 
-	public var zoomScale                    = CGFloat(1.0)
+	public var zoomScale                    = CGFloat(2.0)
 
 	/// Variable for storing initial zoom scale before Pinch to Zoom begins
 
-	public var beginZoomScale               = CGFloat(1.0)
+	public var beginZoomScale               = CGFloat(2.0)
 
 	/// Returns true if the torch (flash) is currently enabled
 
