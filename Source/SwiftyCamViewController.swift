@@ -701,14 +701,6 @@ import AVFoundation
 		}
 	}
     
-    public func getAvailablePictureSizes(_ ratio: String) -> [String]{
-        cachedPictureRatioSizeMap[ratio]?.map({ (dim) -> String in
-            return String(dim.width) + "x" + String(dim.height)
-        }) ?? []
-    }
-    
-    private var cachedPictureRatioSizeMap: [String:[CMVideoDimensions]] = [:]
-    
     var pictureSize = "0x0"
 	/// Add Video Inputs
 	fileprivate func addVideoInput() {
@@ -718,46 +710,6 @@ import AVFoundation
 		case .rear:
 			videoDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
 		}
-        cachedPictureRatioSizeMap.removeAll()
-        var pictureSizes: [CMVideoDimensions] = []
-        if var formats = videoDevice?.formats {
-            formats.sort{
-                let dimA = $0.highResolutionStillImageDimensions
-                let dimB = $1.highResolutionStillImageDimensions
-                return dimA.width > dimB.width && dimA.height > dimB.height
-            }
-            for format  in formats {
-                if(!pictureSizes.contains { (dim) -> Bool in
-                    return dim.height == format.highResolutionStillImageDimensions.height && dim.width == format.highResolutionStillImageDimensions.width
-                }){
-                    let dim = format.highResolutionStillImageDimensions
-                    pictureSizes.append(dim)
-                    let ratio = Double(dim.width) / Double(dim.height)
-                    var key: String? = nil
-                    switch ratio {
-                    case 1.0:
-                       key = "1.0"
-                    case 1.2...1.2222222:
-                        key = "6:5"
-                    case 1.3...1.3333334:
-                        key = "4:3"
-                    case 1.77...1.7777778:
-                        key = "16:9"
-                    case 1.5:
-                        key = "3:2"
-                    default: break
-                    }
-                    if key != nil {
-                        var list = cachedPictureRatioSizeMap[key!]
-                        if list == nil {
-                            list = []
-                        }
-                        list?.append(dim)
-                        cachedPictureRatioSizeMap[key!] = list
-                    }
-                }
-            }
-        }
 
 		if let device = videoDevice {
 			do {
