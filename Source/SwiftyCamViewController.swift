@@ -161,7 +161,7 @@ import AVFoundation
     public var allowAutoRotate                = false
 
     /// Specifies the [videoGravity](https://developer.apple.com/reference/avfoundation/avcapturevideopreviewlayer/1386708-videogravity) for the preview layer.
-    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspectFill {
+    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspect {
         didSet {
             previewLayer.gravity = videoGravity
         }
@@ -1093,7 +1093,7 @@ import AVFoundation
         
     }
     
-    var enableHighResolutionOutput: Bool = true
+    var enableHighResolutionOutput: Bool = false
     
     @available(iOS 10.0, *)
     private func capturePhoto(){
@@ -1178,7 +1178,7 @@ import AVFoundation
 				.builtInTelephotoCamera,
 			]
 			let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType(rawValue: mediaType), position: position)
-
+	
 			return  discoverySession.devices.first
 		} else {
 			// Fallback on earlier versions
