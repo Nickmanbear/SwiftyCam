@@ -713,33 +713,33 @@ import AVFoundation
 			videoDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
 		}
 
-		if let device = videoDevice {
-			do {
-				try device.lockForConfiguration()
-				if device.isFocusModeSupported(.continuousAutoFocus) {
-					device.focusMode = .continuousAutoFocus
-					if device.isSmoothAutoFocusSupported {
-						device.isSmoothAutoFocusEnabled = true
-					}
-				}
+		// if let device = videoDevice {
+		// 	do {
+		// 		try device.lockForConfiguration()
+		// 		if device.isFocusModeSupported(.continuousAutoFocus) {
+		// 			device.focusMode = .continuousAutoFocus
+		// 			if device.isSmoothAutoFocusSupported {
+		// 				device.isSmoothAutoFocusEnabled = true
+		// 			}
+		// 		}
 
-				if device.isExposureModeSupported(.continuousAutoExposure) {
-					device.exposureMode = .continuousAutoExposure
-				}
+		// 		if device.isExposureModeSupported(.continuousAutoExposure) {
+		// 			device.exposureMode = .continuousAutoExposure
+		// 		}
 
-				if device.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) {
-					device.whiteBalanceMode = .continuousAutoWhiteBalance
-				}
+		// 		if device.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) {
+		// 			device.whiteBalanceMode = .continuousAutoWhiteBalance
+		// 		}
 
-				if device.isLowLightBoostSupported && lowLightBoost == true {
-					device.automaticallyEnablesLowLightBoostWhenAvailable = true
-				}
+		// 		if device.isLowLightBoostSupported && lowLightBoost == true {
+		// 			device.automaticallyEnablesLowLightBoostWhenAvailable = true
+		// 		}
 
-				device.unlockForConfiguration()
-			} catch {
-				print("[SwiftyCam]: Error locking configuration")
-			}
-		}
+		// 		device.unlockForConfiguration()
+		// 	} catch {
+		// 		print("[SwiftyCam]: Error locking configuration")
+		// 	}
+		// }
 
 		do {
             if let videoDevice = videoDevice {
