@@ -316,7 +316,7 @@ import AVFoundation
 		}
 		sessionQueue.async { [unowned self] in
 			self.configureSession()
-			previewLayer.videoPreviewLayer.connection?.videoScaleAndCropFactor = 2.0
+			previewLayer.videoPreviewLayer.connection?.videoScaleAndCropFactor = 1.5
 		}
 	}
 
@@ -326,7 +326,7 @@ import AVFoundation
     private func updatePreviewLayer(layer: AVCaptureConnection, orientation: AVCaptureVideoOrientation) {
 
         layer.videoOrientation = orientation
-		layer.videoScaleAndCropFactor = 2.0
+		layer.videoScaleAndCropFactor = 1.5
 
         previewLayer.frame = self.view.bounds
 
@@ -795,7 +795,7 @@ import AVFoundation
 		if self.session.canAddOutput(movieFileOutput) {
 			self.session.addOutput(movieFileOutput)
 			if let connection = movieFileOutput.connection(with: AVMediaType.video) {
-				connection.videoScaleAndCropFactor = 2.0
+				connection.videoScaleAndCropFactor = 1.5
 				if connection.isVideoStabilizationSupported {
 					connection.preferredVideoStabilizationMode = .auto
 				}
@@ -861,71 +861,6 @@ import AVFoundation
         }
         return nil
     }
-
-
-	/// Orientation management
-
-	// @objc public func subscribeToDeviceOrientationChangeNotifications() {
-	// 	self.deviceOrientation = UIDevice.current.orientation
-	// 	NotificationCenter.default.addObserver(self, selector: #selector(deviceDidRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-	// }
-
-	// @objc public func unsubscribeFromDeviceOrientationChangeNotifications() {
-	// 	NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-	// 	self.deviceOrientation = nil
-	// }
-
-	// @objc public func deviceDidRotate() {
-	// 	if !UIDevice.current.orientation.isFlat {
-	// 		self.deviceOrientation = UIDevice.current.orientation
-	// 	}
-	// }
-    
-  //   @objc public func getPreviewLayerOrientation() -> AVCaptureVideoOrientation {
-  //       // Depends on layout orientation, not device orientation
-  //       switch UIApplication.shared.statusBarOrientation {
-  //       case .portrait, .unknown:
-  //           return AVCaptureVideoOrientation.portrait
-  //       case .landscapeLeft:
-  //           return AVCaptureVideoOrientation.landscapeLeft
-  //       case .landscapeRight:
-  //           return AVCaptureVideoOrientation.landscapeRight
-  //       case .portraitUpsideDown:
-  //           return AVCaptureVideoOrientation.portraitUpsideDown
-  //       }
-  //   }
-
-	// @objc public func getVideoOrientation() -> AVCaptureVideoOrientation {
-	// 	guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return previewLayer!.videoPreviewLayer.connection.videoOrientation }
-
-	// 	switch deviceOrientation {
-	// 	case .landscapeLeft:
-	// 		// keep the same if using front camera
-	// 		return self.currentCamera == .rear ? .landscapeRight : .landscapeLeft;
-	// 	case .landscapeRight:
-	// 		// keep the same if using front camera
-	// 		return self.currentCamera == .rear ? .landscapeLeft : .landscapeRight;
-	// 	case .portraitUpsideDown:
-	// 		return .portraitUpsideDown
-	// 	default:
-	// 		return .portrait
-	// 	}
-	// }
-
-	// @objc public func getImageOrientation(forCamera: CameraSelection) -> UIImageOrientation {
-	// 	guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return forCamera == .rear ? .right : .leftMirrored }
-
-	// 	switch deviceOrientation {
-	// 	case .landscapeLeft:
-	// 		return forCamera == .rear ? .up : .downMirrored
-	// 	case .landscapeRight:
-	// 		return forCamera == .rear ? .down : .upMirrored
-	// 	case .portraitUpsideDown:
-	// 		return forCamera == .rear ? .left : .rightMirrored
-	// 	default:
-	// 		return forCamera == .rear ? .right : .leftMirrored
-	// 	}
-	// }
 
 	/**
 	Returns a UIImage from Image Data.
