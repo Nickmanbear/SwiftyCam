@@ -660,7 +660,7 @@ import AVFoundation
 		// begin configuring session
 
 		session.beginConfiguration()
-		// configureVideoPreset()
+		configureVideoPreset()
 		addVideoInput()
 		if disableAudio == false {
 			addAudioInput()
@@ -675,7 +675,7 @@ import AVFoundation
 
 	fileprivate func addInputs() {
 		session.beginConfiguration()
-		// configureVideoPreset()
+		configureVideoPreset()
 		addVideoInput()
 		if disableAudio == false {
 			addAudioInput()
@@ -686,7 +686,7 @@ import AVFoundation
 
 	private func updateVideoPreset() {
 		session.beginConfiguration()
-		// configureVideoPreset()
+		configureVideoPreset()
 		session.commitConfiguration()
 	}
 
@@ -1031,6 +1031,7 @@ import AVFoundation
 	*/
 
 	@objc public func videoInputPresetFromVideoQuality(quality: VideoQuality) -> String {
+		return AVCaptureSession.Preset.photo.rawValue
 		switch quality {
 		case .high: return AVCaptureSession.Preset.high.rawValue
 		case .medium: return AVCaptureSession.Preset.medium.rawValue
