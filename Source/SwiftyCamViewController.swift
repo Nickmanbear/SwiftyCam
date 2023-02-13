@@ -316,7 +316,7 @@ import AVFoundation
 		}
 		sessionQueue.async { [unowned self] in
 			self.configureSession()
-			previewLayer.videoPreviewLayer.connection?.videoScaleAndCropFactor = 0.5
+			previewLayer.videoPreviewLayer.connection?.videoScaleAndCropFactor = 2.0
 		}
 	}
 
@@ -326,7 +326,7 @@ import AVFoundation
     private func updatePreviewLayer(layer: AVCaptureConnection, orientation: AVCaptureVideoOrientation) {
 
         layer.videoOrientation = orientation
-		layer.videoScaleAndCropFactor = 0.5
+		layer.videoScaleAndCropFactor = 2.0
 
         previewLayer.frame = self.view.bounds
 
@@ -795,7 +795,7 @@ import AVFoundation
 		if self.session.canAddOutput(movieFileOutput) {
 			self.session.addOutput(movieFileOutput)
 			if let connection = movieFileOutput.connection(with: AVMediaType.video) {
-				connection.videoScaleAndCropFactor = 1.0
+				connection.videoScaleAndCropFactor = 2.0
 				if connection.isVideoStabilizationSupported {
 					connection.preferredVideoStabilizationMode = .auto
 				}
