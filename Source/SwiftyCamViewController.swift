@@ -714,6 +714,27 @@ import AVFoundation
 			videoDevice = SwiftyCamViewController.deviceWithMediaType(AVMediaType.video.rawValue, preferringPosition: .back)
 		}
 
+		do {
+            if let videoDevice = videoDevice {
+                let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+                if session.canAddInput(videoDeviceInput) {
+                    session.addInput(videoDeviceInput)
+                    self.videoDeviceInput = videoDeviceInput
+                } else {
+                    print("[SwiftyCam]: Could not add video device input to the session")
+                    print(session.canSetSessionPreset(AVCaptureSession.Preset(rawValue: videoInputPresetFromVideoQuality(quality: videoQuality))))
+                    setupResult = .configurationFailed
+                    session.commitConfiguration()
+                    return
+                }
+            }
+			
+		} catch {
+			print("[SwiftyCam]: Could not create video device input: \(error)")
+			setupResult = .configurationFailed
+			return
+		}
+
 		if let device = videoDevice {
 			do {
 				try device.lockForConfiguration()
@@ -749,27 +770,6 @@ import AVFoundation
 			} catch {
 				print("[SwiftyCam]: Error locking configuration")
 			}
-		}
-
-		do {
-            if let videoDevice = videoDevice {
-                let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-                if session.canAddInput(videoDeviceInput) {
-                    session.addInput(videoDeviceInput)
-                    self.videoDeviceInput = videoDeviceInput
-                } else {
-                    print("[SwiftyCam]: Could not add video device input to the session")
-                    print(session.canSetSessionPreset(AVCaptureSession.Preset(rawValue: videoInputPresetFromVideoQuality(quality: videoQuality))))
-                    setupResult = .configurationFailed
-                    session.commitConfiguration()
-                    return
-                }
-            }
-			
-		} catch {
-			print("[SwiftyCam]: Could not create video device input: \(error)")
-			setupResult = .configurationFailed
-			return
 		}
 	}
 
