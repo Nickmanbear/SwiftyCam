@@ -736,7 +736,14 @@ import AVFoundation
 					device.automaticallyEnablesLowLightBoostWhenAvailable = true
 				}
 
-				device.videoZoomFactor = self.zoomScale
+				zoomScale = min(maxZoomScale, max(1.0, min(beginZoomScale,  device.activeFormat.videoMaxZoomFactor)))
+
+				device.videoZoomFactor = zoomScale
+
+				// Call Delegate function with current zoom scale
+				DispatchQueue.main.async {
+					self.cameraDelegate?.swiftyCam(self, didChangeZoomLevel: self.zoomScale)
+				}
 
 				device.unlockForConfiguration()
 			} catch {
