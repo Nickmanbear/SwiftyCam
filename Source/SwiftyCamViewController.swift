@@ -736,7 +736,7 @@ import AVFoundation
 					device.automaticallyEnablesLowLightBoostWhenAvailable = true
 				}
 
-				device.videoZoomFactor = zoomScale
+				device.videoZoomFactor = self.zoomScale
 
 				device.unlockForConfiguration()
 			} catch {
