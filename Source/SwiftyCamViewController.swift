@@ -660,7 +660,8 @@ import AVFoundation
 		// begin configuring session
 
 		session.beginConfiguration()
-		configureVideoPreset()
+		session.sessionPreset = AVCaptureSession.Preset.photo
+		// configureVideoPreset()
 		addVideoInput()
 		if disableAudio == false {
 			addAudioInput()
@@ -675,7 +676,8 @@ import AVFoundation
 
 	fileprivate func addInputs() {
 		session.beginConfiguration()
-		configureVideoPreset()
+		session.sessionPreset = AVCaptureSession.Preset.photo
+		// configureVideoPreset()
 		addVideoInput()
 		if disableAudio == false {
 			addAudioInput()
@@ -686,7 +688,8 @@ import AVFoundation
 
 	private func updateVideoPreset() {
 		session.beginConfiguration()
-		configureVideoPreset()
+		session.sessionPreset = AVCaptureSession.Preset.photo
+		// configureVideoPreset()
 		session.commitConfiguration()
 	}
 
@@ -1032,26 +1035,26 @@ import AVFoundation
 
 	@objc public func videoInputPresetFromVideoQuality(quality: VideoQuality) -> String {
 		return AVCaptureSession.Preset.photo.rawValue
-		switch quality {
-		case .high: return AVCaptureSession.Preset.high.rawValue
-		case .medium: return AVCaptureSession.Preset.medium.rawValue
-		case .low: return AVCaptureSession.Preset.low.rawValue
-		case .resolution352x288: return AVCaptureSession.Preset.cif352x288.rawValue
-		case .resolution640x480: return AVCaptureSession.Preset.vga640x480.rawValue
-		case .resolution1280x720: return AVCaptureSession.Preset.hd1280x720.rawValue
-		case .resolution1920x1080: return AVCaptureSession.Preset.hd1920x1080.rawValue
-		case .iframe960x540: return AVCaptureSession.Preset.iFrame960x540.rawValue
-		case .iframe1280x720: return AVCaptureSession.Preset.iFrame1280x720.rawValue
-        case .photo: return AVCaptureSession.Preset.photo.rawValue
-		case .resolution3840x2160:
-			if #available(iOS 9.0, *) {
-				return AVCaptureSession.Preset.hd4K3840x2160.rawValue
-			}
-			else {
-				print("[SwiftyCam]: Resolution 3840x2160 not supported")
-				return AVCaptureSession.Preset.high.rawValue
-			}
-		}
+		// switch quality {
+		// case .high: return AVCaptureSession.Preset.high.rawValue
+		// case .medium: return AVCaptureSession.Preset.medium.rawValue
+		// case .low: return AVCaptureSession.Preset.low.rawValue
+		// case .resolution352x288: return AVCaptureSession.Preset.cif352x288.rawValue
+		// case .resolution640x480: return AVCaptureSession.Preset.vga640x480.rawValue
+		// case .resolution1280x720: return AVCaptureSession.Preset.hd1280x720.rawValue
+		// case .resolution1920x1080: return AVCaptureSession.Preset.hd1920x1080.rawValue
+		// case .iframe960x540: return AVCaptureSession.Preset.iFrame960x540.rawValue
+		// case .iframe1280x720: return AVCaptureSession.Preset.iFrame1280x720.rawValue
+        // case .photo: return AVCaptureSession.Preset.photo.rawValue
+		// case .resolution3840x2160:
+		// 	if #available(iOS 9.0, *) {
+		// 		return AVCaptureSession.Preset.hd4K3840x2160.rawValue
+		// 	}
+		// 	else {
+		// 		print("[SwiftyCam]: Resolution 3840x2160 not supported")
+		// 		return AVCaptureSession.Preset.high.rawValue
+		// 	}
+		// }
 	}
 
 	/// Get Devices
