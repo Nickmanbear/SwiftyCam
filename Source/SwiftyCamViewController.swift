@@ -161,7 +161,7 @@ import AVFoundation
     public var allowAutoRotate                = false
 
     /// Specifies the [videoGravity](https://developer.apple.com/reference/avfoundation/avcapturevideopreviewlayer/1386708-videogravity) for the preview layer.
-    public var videoGravity                   : SwiftyCamVideoGravity = .resize {
+    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspectFill {
         didSet {
             previewLayer.gravity = videoGravity
         }
@@ -853,7 +853,7 @@ import AVFoundation
             let width = Int(values.first ?? "") ?? 0
             let height = Int(values.last ?? "") ?? 0
             if(width > 0 && height > 0){
-                return AVMakeRect(aspectRatio: CGSize(width: width, height: height), insideRect: CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
+                return AVMakeRect(aspectRatio: CGSize(width: width / 2, height: height / 2), insideRect: CGRect(x: 0, y: 0, width: imageWidth / 2, height: imageHeight / 2))
             }
         }
         return nil
